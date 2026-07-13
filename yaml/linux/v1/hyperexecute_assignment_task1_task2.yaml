@@ -1,0 +1,34 @@
+---
+version: 0.1
+runson: linux
+
+autosplit: true
+concurrency: 4
+
+runtime:
+  language: java
+  version: 11
+
+env:
+  ENVIRONMENT: staging
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
+pre:
+  - 'echo "ENVIRONMENT from HyperExecute pre step:"'
+  - printenv ENVIRONMENT
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+
+testDiscovery:
+  type: raw
+  mode: static
+  command: echo Test_1 && echo Test_2 && echo Test_3 && echo Test_4
+
+testRunnerCommand: mvn test -Dplatname=linux -Dmaven.repo.local=./.m2 -DselectedTests=$test
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, assignment, env]

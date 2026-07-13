@@ -1,0 +1,5 @@
+2026-07-13T10:00:01Z INFO staging Test_1 started
+2026-07-13T10:00:22Z PASS staging Test_1 completed
+2026-07-13T10:01:01Z ERROR staging Test_Force_Failure intentional failure
+2026-07-13T10:01:04Z FAIL staging Test_Force_Failure retry scheduled
+2026-07-13T10:01:09Z FAIL staging Test_Force_Failure retry exhausted

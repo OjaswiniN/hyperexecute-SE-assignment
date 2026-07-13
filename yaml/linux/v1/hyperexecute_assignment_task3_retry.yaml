@@ -1,0 +1,29 @@
+---
+version: 0.1
+runson: linux
+
+autosplit: true
+concurrency: 1
+
+runtime:
+  language: java
+  version: 11
+
+cacheKey: '{{ checksum "pom.xml" }}'
+cacheDirectories:
+  - .m2
+
+pre:
+  - mvn -Dmaven.repo.local=./.m2 dependency:resolve
+
+testDiscovery:
+  type: raw
+  mode: static
+  command: echo Test_Force_Failure
+
+testRunnerCommand: mvn test -Dplatname=assignment_retry_linux -Dmaven.repo.local=./.m2 -DselectedTests=$test
+
+retryOnFailure: true
+maxRetries: 1
+
+jobLabel: [selenium-testng, linux, assignment, retry]

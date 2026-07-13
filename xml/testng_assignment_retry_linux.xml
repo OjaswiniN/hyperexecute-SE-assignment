@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Linux: Intentional Failure Retry Validation" thread-count="1" parallel="false">
+    <test name="Test_Force_Failure">
+        <classes>
+            <class name="ForceFailureTest" />
+        </classes>
+    </test>
+</suite>
