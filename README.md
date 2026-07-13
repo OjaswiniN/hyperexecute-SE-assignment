@@ -1,3 +1,77 @@
+# HyperExecute SE Assignment
+
+This repository contains my completed HyperExecute Solutions Engineer technical assignment using the LambdaTest/TestNG Selenium HyperExecute sample project.
+
+Detailed task notes, commands, log evidence, and dashboard links are in [`SUBMISSION.md`](SUBMISSION.md).
+
+## Assignment Deliverables
+
+| Task | What was added/changed | Evidence |
+| --- | --- | --- |
+| Task 1: Fix broken YAML | Added fixed Linux HyperExecute YAML at `yaml/linux/v1/hyperexecute_assignment_task1_task2.yaml` | Successful dashboard job and notes in `SUBMISSION.md` |
+| Task 2: Environment variables | Added `ENVIRONMENT: staging` in YAML, printed it in pre-steps, and read it from Java using `System.getenv` in `Test1.java` | Pre-step and TestNG log evidence in `SUBMISSION.md` |
+| Task 3: Force failure and retries | Added `ForceFailureTest.java`, retry suite XML, and retry YAML at `yaml/linux/v1/hyperexecute_assignment_task3_retry.yaml` | Failed retry job and retry evidence in `SUBMISSION.md` |
+| Task 4: Linux/Unix basics | Added `assignment-sample.log` and documented `grep`, `awk`, `sed`, and piped commands | Commands and sample output in `SUBMISSION.md` |
+
+## Key Files
+
+- `SUBMISSION.md` - final assignment write-up with task notes and evidence.
+- `yaml/linux/v1/hyperexecute_assignment_task1_task2.yaml` - fixed YAML for the successful HyperExecute run and environment-variable task.
+- `yaml/linux/v1/hyperexecute_assignment_task3_retry.yaml` - retry YAML for the intentional failure test.
+- `src/test/java/Test1.java` - reads and prints `ENVIRONMENT` from inside a TestNG test.
+- `src/test/java/ForceFailureTest.java` - intentionally fails to validate `retryOnFailure`.
+- `xml/testng_assignment_retry_linux.xml` - TestNG suite for the forced failure test.
+- `assignment-sample.log` - sample file used for Linux/Unix command examples.
+
+## Evidence Screenshots
+
+### Task 1 and Task 2: Successful HyperExecute Job
+
+This job used the fixed Linux YAML and completed successfully with 4 autosplit tasks.
+
+![Successful HyperExecute job](images/evidence/task1-task2-success.png)
+
+Dashboard link: https://hyperexecute.lambdatest.com/hyperexecute/task?jobId=67668873-ae72-436d-841d-3af646aad4ff
+
+### Task 3: Intentional Failure and Retry Job
+
+This job intentionally fails through `ForceFailureTest.java`. The retry proof is documented in `SUBMISSION.md` with the CLI evidence showing `{retry 1} Test_Force_Failure`.
+
+![Retry failure HyperExecute job](images/evidence/task3-retry-failure.png)
+
+Dashboard link: https://hyperexecute.lambdatest.com/hyperexecute/task?jobId=0463a85b-2b9d-4137-ab35-42dc4b2f560e
+
+## How To Run
+
+Set LambdaTest credentials as environment variables before running. Credentials are not committed to this repository.
+
+```bash
+export LT_USERNAME="YOUR_USERNAME"
+export LT_ACCESS_KEY="YOUR_ACCESS_KEY"
+```
+
+Run Task 1 and Task 2:
+
+```bash
+./hyperexecute --config yaml/linux/v1/hyperexecute_assignment_task1_task2.yaml --force-clean-artifacts --download-artifacts
+```
+
+Run Task 3:
+
+```bash
+./hyperexecute --config yaml/linux/v1/hyperexecute_assignment_task3_retry.yaml --force-clean-artifacts --download-artifacts
+```
+
+## Summary Of Fixes
+
+- Aligned the YAML with the Linux TestNG suite and Java 11 runtime.
+- Used static autosplit discovery entries for the known TestNG test names.
+- Passed each discovered test into Maven using `-DselectedTests=$test`.
+- Used `-Dplatname=linux` so Maven resolves `xml/testng_linux.xml`.
+- Added a custom `ENVIRONMENT` variable and validated it from both HyperExecute pre-steps and Java test execution.
+- Added an intentional hard failure and enabled `retryOnFailure` with `maxRetries: 1`.
+- Added documented Linux command examples for `grep`, `awk`, `sed`, and a pipe chain.
+
 # Run Selenium Tests with TestNG on HyperExecute by TestMu AI (Formerly LambdaTest)
 
 <p align="center">
